@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CardioTwin AI - Doctor Dashboard</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #172033;
+}
+
+.header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5eaf1;
+    padding: 22px 30px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.header p {
+    margin: 7px 0 0;
+    color: #667085;
+    font-size: 14px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: calc(100vh - 100px);
+}
+
+.sidebar {
+    background: #ffffff;
+    border-right: 1px solid #e5eaf1;
+    padding: 20px;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+}
+
+.patient-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.patient {
+    padding: 13px;
+    border: 1px solid #e4e8ef;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #ffffff;
+}
+
+.patient:hover {
+    background: #f7f9fc;
+}
+
+.patient.active {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.patient-name {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.patient-risk {
+    font-size: 12px;
+    color: #667085;
+}
+
+.main {
+    padding: 25px;
+    overflow: auto;
+}
+
+.profile {
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.profile-header h2 {
+    margin: 0;
+}
+
+.badge {
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.low {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.moderate {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.high {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.info-card {
+    background: #f8fafc;
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.label {
+    color: #667085;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.value {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.chart-wrap {
+    width: 100%;
+    height: 320px;
+    position: relative;
+}
+
+#trendChart {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.probability {
+    margin: 12px 0;
+}
+
+.probability-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.bar {
+    width: 100%;
+    height: 9px;
+    background: #edf1f5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.factor {
+    margin: 12px 0;
+}
+
+.factor-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.factor-bar {
+    height: 8px;
+    background: #edf1f5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.factor-fill {
+    height: 100%;
+    background: #2563eb;
+}
+
+.sim-row {
+    margin: 20px 0;
+}
+
+.sim-row label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+.sim-result {
+    background: #f8fafc;
+    border: 1px solid #e4e8ef;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.sim-result-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.sim-probs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.sim-prob {
+    background: #ffffff;
+    border: 1px solid #e4e8ef;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.sim-prob-label {
+    font-size: 11px;
+    color: #667085;
+}
+
+.sim-prob-value {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.note {
+    font-size: 12px;
+    color: #667085;
+    line-height: 1.6;
+}
+
+.error {
+    padding: 30px;
+    color: #b42318;
+    background: #fff1f0;
+    border: 1px solid #fecdca;
+    border-radius: 12px;
+}
+
+.loading {
+    color: #667085;
+}
+
+@media (max-width: 900px) {
+
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid #e5eaf1;
+    }
+
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sim-probs {
+        grid-template-columns: 1fr;
+    }
+
+    .main {
+        padding: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+    <h1>CardioTwin AI</h1>
+
+    <p>
+        Doctor Dashboard — Digital twin risk monitoring using
+        fused EHR + 14-day wearable trends. Synthetic research PoC.
+    </p>
+
+</div>
+
+
+<div class="container">
+
+    <aside class="sidebar">
+
+        <h3>Patients</h3>
+
+        <div id="patientList" class="patient-list">
+            Loading patients...
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <section id="profile" class="profile">
+            Loading dashboard...
+        </section>
+
+
+        <div class="grid">
+
+            <div>
+
+                <section class="card">
+
+                    <h3>14-Day Wearable Trajectory</h3>
+
+                    <div class="chart-wrap">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+
+                </section>
+
+
+                <section class="card">
+
+                    <h3>Contributing Factors</h3>
+
+                    <div id="factors"></div>
+
+                </section>
+
+            </div>
+
+
+            <div>
+
+                <section class="card">
+
+                    <h3>Model Output</h3>
+
+                    <div id="probabilities"></div>
+
+                </section>
+
+
+                <section class="card">
+
+                    <h3>🔮 What-If Simulator</h3>
+
+
+                    <div class="sim-row">
+
+                        <label>
+                            <span>Sleep change</span>
+                            <span id="sleepValue">+0.0h</span>
+                        </label>
+
+                        <input
+                            id="sleepSlider"
+                            type="range"
+                            min="-2"
+                            max="2"
+                            step="0.5"
+                            value="0"
+                        >
+
+                    </div>
+
+
+                    <div class="sim-row">
+
+                        <label>
+                            <span>Daily steps change</span>
+                            <span id="stepsValue">+0</span>
+                        </label>
+
+                        <input
+                            id="stepsSlider"
+                            type="range"
+                            min="-5000"
+                            max="5000"
+                            step="500"
+                            value="0"
+                        >
+
+                    </div>
+
+
+                    <div class="sim-row">
+
+                        <label>
+                            <span>Resting HR change</span>
+                            <span id="rhrValue">+0 bpm</span>
+                        </label>
+
+                        <input
+                            id="rhrSlider"
+                            type="range"
+                            min="-15"
+                            max="15"
+                            step="1"
+                            value="0"
+                        >
+
+                    </div>
+
+
+                    <div id="simResult" class="sim-result">
+
+                        Adjust the sliders to explore
+                        model-generated scenarios.
+
+                    </div>
+
+
+                    <p class="note">
+
+                        What-if results are generated from
+                        precomputed Random Forest scenarios.
+                        This is an exploratory research PoC and
+                        does not represent a clinical diagnosis
+                        or recommendation.
+
+                    </p>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+let DATA = null;
+let currentPatient = null;
+
+
+/* ============================================================
+   LOAD DASHBOARD DATA
+============================================================ */
+
+async function loadDashboard() {
+
+    try {
+
+        const response =
+            await fetch(
+                "dashboard_data.json?cache=" +
+                Date.now()
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "dashboard_data.json could not be loaded."
+            );
+
+        }
+
+        DATA = await response.json();
+
+
+        if (
+            !DATA.patients ||
+            DATA.patients.length === 0
+        ) {
+
+            throw new Error(
+                "No patient data found."
+            );
+
+        }
+
+
+        renderPatientList();
+
+        selectPatient(0);
+
+
+    } catch (error) {
+
+        document.querySelector(".main").innerHTML = `
+
+            <div class="error">
+
+                <h3>Dashboard loading error</h3>
+
+                <p>${escapeHtml(error.message)}</p>
+
+                <p>
+                    Make sure dashboard_data.json is inside
+                    the same dashboard folder.
+                </p>
+
+            </div>
+
+        `;
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* ============================================================
+   RISK LABEL
+============================================================ */
+
+function getRiskText(patient) {
+
+    const risk =
+        patient.risk_level ??
+        patient.risk_label;
+
+
+    if (
+        risk === 0 ||
+        risk === "0"
+    ) {
+
+        return "Low";
+
+    }
+
+
+    if (
+        risk === 1 ||
+        risk === "1"
+    ) {
+
+        return "Moderate";
+
+    }
+
+
+    if (
+        risk === 2 ||
+        risk === "2"
+    ) {
+
+        return "High / Early Warning";
+
+    }
+
+
+    return "Unknown";
+
+}
+
+
+/* ============================================================
+   RISK CLASS
+============================================================ */
+
+function getRiskClass(risk) {
+
+    const value =
+        String(risk).toLowerCase();
+
+
+    if (
+        value.includes("high")
+    ) {
+
+        return "high";
+
+    }
+
+
+    if (
+        value.includes("moderate")
+    ) {
+
+        return "moderate";
+
+    }
+
+
+    return "low";
+
+}
+
+
+/* ============================================================
+   PATIENT LIST
+============================================================ */
+
+function renderPatientList() {
+
+    const list =
+        document.getElementById(
+            "patientList"
+        );
+
+    list.innerHTML = "";
+
+
+    DATA.patients.forEach(
+        (patient, index) => {
+
+            const div =
+                document.createElement("div");
+
+            div.className =
+                "patient";
+
+            div.id =
+                "patient-" + index;
+
+
+            const sex =
+                patient.sex ||
+                patient.gender ||
+                "—";
+
+
+            const risk =
+                getRiskText(patient);
+
+
+            div.innerHTML = `
+
+                <div class="patient-name">
+
+                    #${index + 1}
+                    ${patient.age ?? "—"}${escapeHtml(sex)}
+
+                </div>
+
+                <div class="patient-risk">
+
+                    ${risk}
+
+                </div>
+
+            `;
+
+
+            div.onclick =
+                () => selectPatient(index);
+
+
+            list.appendChild(div);
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   SELECT PATIENT
+============================================================ */
+
+function selectPatient(index) {
+
+    currentPatient =
+        DATA.patients[index];
+
+
+    document
+        .querySelectorAll(".patient")
+        .forEach(
+            x => x.classList.remove("active")
+        );
+
+
+    const selected =
+        document.getElementById(
+            "patient-" + index
+        );
+
+
+    if (selected) {
+
+        selected.classList.add("active");
+
+    }
+
+
+    resetSimulator();
+
+    renderProfile();
+
+    renderProbabilities();
+
+    renderFactors();
+
+    renderChart();
+
+    updateSimulator();
+
+}
+
+
+/* ============================================================
+   PROFILE
+============================================================ */
+
+function renderProfile() {
+
+    const p =
+        currentPatient;
+
+
+    const risk =
+        getRiskText(p);
+
+
+    const riskClass =
+        getRiskClass(risk);
+
+
+    const series =
+        Array.isArray(p.series)
+        ? p.series
+        : [];
+
+
+    const latest =
+        series.length > 0
+        ? series[series.length - 1]
+        : null;
+
+
+    const recentHRV =
+        latest &&
+        Number.isFinite(
+            Number(latest.hrv)
+        )
+        ? Number(latest.hrv).toFixed(1) + " ms"
+        : "—";
+
+
+    const recentRHR =
+        latest &&
+        Number.isFinite(
+            Number(latest.rhr)
+        )
+        ? Number(latest.rhr).toFixed(1) + " bpm"
+        : "—";
+
+
+    const bmi =
+        Number.isFinite(
+            Number(p.bmi)
+        )
+        ? Number(p.bmi).toFixed(1)
+        : "—";
+
+
+    const bp =
+        Number.isFinite(
+            Number(p.systolic_bp)
+        )
+        ? Number(p.systolic_bp).toFixed(1)
+        : "—";
+
+
+    const cholesterol =
+        Number.isFinite(
+            Number(p.cholesterol_mgdl)
+        )
+        ? Number(p.cholesterol_mgdl).toFixed(0)
+        : "—";
+
+
+    const riskProbability =
+        getCurrentRiskProbability(p);
+
+
+    document.getElementById(
+        "profile"
+    ).innerHTML = `
+
+        <div class="profile-header">
+
+            <div>
+
+                <h2>
+                    Patient #${p.patient_id ?? "—"}
+                </h2>
+
+                <p class="note">
+                    Digital twin monitoring profile
+                </p>
+
+            </div>
+
+
+            <div class="badge ${riskClass}">
+
+                ${risk}
+
+            </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+
+            <div class="info-card">
+
+                <div class="label">
+                    Age / Sex
+                </div>
+
+                <div class="value">
+
+                    ${p.age ?? "—"}
+                    ${escapeHtml(
+                        p.sex ||
+                        p.gender ||
+                        ""
+                    )}
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="label">
+                    BMI
+                </div>
+
+                <div class="value">
+                    ${bmi}
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="label">
+                    Systolic BP
+                </div>
+
+                <div class="value">
+                    ${bp}
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="label">
+                    Cholesterol
+                </div>
+
+                <div class="value">
+                    ${cholesterol}
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="label">
+                    Recent HRV
+                </div>
+
+                <div class="value">
+                    ${recentHRV}
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="label">
+                    Recent RHR
+                </div>
+
+                <div class="value">
+                    ${recentRHR}
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="label">
+                    Model Output
+                </div>
+
+                <div class="value">
+                    ${risk}
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="label">
+                    Risk Probability
+                </div>
+
+                <div class="value">
+                    ${riskProbability}
+                </div>
+
+            </div>
+
+
+        </div>
+
+    `;
+
+}
+
+
+/* ============================================================
+   CURRENT RISK PROBABILITY
+   Supports:
+   {
+      "0": 0.083,
+      "1": 0.320,
+      "2": 0.597
+   }
+============================================================ */
+
+function getCurrentRiskProbability(patient) {
+
+    const probs =
+        patient.risk_probabilities;
+
+
+    if (
+        !probs ||
+        typeof probs !== "object"
+    ) {
+
+        return "—";
+
+    }
+
+
+    const risk =
+        String(
+            patient.risk_level ??
+            patient.risk_label ??
+            ""
+        );
+
+
+    const value =
+        probs[risk];
+
+
+    if (
+        value === undefined ||
+        value === null
+    ) {
+
+        return "—";
+
+    }
+
+
+    return (
+        Number(value) * 100
+    ).toFixed(1) + "%";
+
+}
+
+
+/* ============================================================
+   MODEL PROBABILITIES
+============================================================ */
+
+function renderProbabilities() {
+
+    const container =
+        document.getElementById(
+            "probabilities"
+        );
+
+
+    container.innerHTML = "";
+
+
+    const probs =
+        currentPatient.risk_probabilities;
+
+
+    if (
+        !probs ||
+        typeof probs !== "object"
+    ) {
+
+        container.innerHTML = `
+
+            <p class="note">
+                Probability data unavailable.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    const labels = [
+        "Low",
+        "Moderate",
+        "High"
+    ];
+
+
+    const keys = [
+        "0",
+        "1",
+        "2"
+    ];
+
+
+    keys.forEach(
+        (key, index) => {
+
+            const raw =
+                Number(
+                    probs[key] ?? 0
+                );
+
+
+            const percentage =
+                raw * 100;
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "probability";
+
+
+            const background =
+                index === 0
+                ? "#22c55e"
+                : index === 1
+                ? "#f59e0b"
+                : "#ef4444";
+
+
+            row.innerHTML = `
+
+                <div class="probability-row">
+
+                    <span>
+                        ${labels[index]}
+                    </span>
+
+                    <strong>
+                        ${percentage.toFixed(1)}%
+                    </strong>
+
+                </div>
+
+
+                <div class="bar">
+
+                    <div
+                        class="fill"
+                        style="
+                            width:${percentage}%;
+                            background:${background};
+                        "
+                    ></div>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(row);
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   FEATURE IMPORTANCE
+============================================================ */
+
+function renderFactors() {
+
+    const container =
+        document.getElementById(
+            "factors"
+        );
+
+
+    container.innerHTML = "";
+
+
+    const factors =
+        DATA.feature_importances || [];
+
+
+    if (
+        factors.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <p class="note">
+                Feature importance unavailable.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    const max =
+        Math.max(
+            ...factors.map(
+                x =>
+                    Number(
+                        x.importance
+                    ) || 0
+            )
+        );
+
+
+    factors
+        .slice(0, 8)
+        .forEach(
+            item => {
+
+                const importance =
+                    Number(
+                        item.importance
+                    ) || 0;
+
+
+                const width =
+                    max > 0
+                    ? (
+                        importance /
+                        max
+                    ) * 100
+                    : 0;
+
+
+                const div =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                div.className =
+                    "factor";
+
+
+                div.innerHTML = `
+
+                    <div class="factor-top">
+
+                        <span>
+                            ${formatFeatureName(
+                                item.feature
+                            )}
+                        </span>
+
+                        <strong>
+                            ${(importance * 100).toFixed(1)}%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="factor-bar">
+
+                        <div
+                            class="factor-fill"
+                            style="
+                                width:${width}%
+                            "
+                        ></div>
+
+                    </div>
+
+                `;
+
+
+                container.appendChild(div);
+
+            }
+        );
+
+}
+
+
+/* ============================================================
+   FORMAT FEATURE NAME
+============================================================ */
+
+function formatFeatureName(name) {
+
+    if (!name) {
+
+        return "Unknown";
+
+    }
+
+
+    return String(name)
+        .replaceAll("_", " ")
+        .replace(
+            /\b\w/g,
+            c => c.toUpperCase()
+        );
+
+}
+
+
+/* ============================================================
+   CHART
+============================================================ */
+
+function renderChart() {
+
+    const canvas =
+        document.getElementById(
+            "trendChart"
+        );
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    const series =
+        Array.isArray(
+            currentPatient.series
+        )
+        ? currentPatient.series
+        : [];
+
+
+    const width =
+        canvas.clientWidth || 700;
+
+
+    const height =
+        canvas.clientHeight || 320;
+
+
+    const dpr =
+        window.devicePixelRatio || 1;
+
+
+    canvas.width =
+        width * dpr;
+
+
+    canvas.height =
+        height * dpr;
+
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
+
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    if (
+        series.length === 0
+    ) {
+
+        ctx.fillStyle =
+            "#667085";
+
+        ctx.font =
+            "16px Arial";
+
+        ctx.fillText(
+            "Wearable series unavailable.",
+            30,
+            50
+        );
+
+        return;
+
+    }
+
+
+    const padding = 45;
+
+
+    const chartWidth =
+        width -
+        padding * 2;
+
+
+    const chartHeight =
+        height -
+        padding * 2;
+
+
+    const hrv =
+        series.map(
+            x => Number(x.hrv)
+        );
+
+
+    const rhr =
+        series.map(
+            x => Number(x.rhr)
+        );
+
+
+    const all =
+        [...hrv, ...rhr]
+        .filter(
+            x => Number.isFinite(x)
+        );
+
+
+    let min =
+        Math.min(...all);
+
+
+    let max =
+        Math.max(...all);
+
+
+    if (
+        min === max
+    ) {
+
+        min -= 1;
+        max += 1;
+
+    }
+
+
+    const range =
+        max - min;
+
+
+    min -=
+        range * 0.1;
+
+
+    max +=
+        range * 0.1;
+
+
+    function xPosition(i) {
+
+        if (
+            series.length === 1
+        ) {
+
+            return (
+                padding +
+                chartWidth / 2
+            );
+
+        }
+
+
+        return (
+            padding +
+            (
+                i /
+                (series.length - 1)
+            ) *
+            chartWidth
+        );
+
+    }
+
+
+    function yPosition(value) {
+
+        return (
+            height -
+            padding -
+            (
+                (
+                    value - min
+                ) /
+                (
+                    max - min
+                )
+            ) *
+            chartHeight
+        );
+
+    }
+
+
+    /* Grid */
+
+    ctx.strokeStyle =
+        "#e5e7eb";
+
+    ctx.lineWidth = 1;
+
+
+    for (
+        let i = 0;
+        i <= 5;
+        i++
+    ) {
+
+        const y =
+            padding +
+            (
+                i / 5
+            ) *
+            chartHeight;
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            padding,
+            y
+        );
+
+        ctx.lineTo(
+            width - padding,
+            y
+        );
+
+        ctx.stroke();
+
+
+        const value =
+            max -
+            (
+                i / 5
+            ) *
+            (
+                max - min
+            );
+
+
+        ctx.fillStyle =
+            "#667085";
+
+        ctx.font =
+            "11px Arial";
+
+
+        ctx.fillText(
+            value.toFixed(0),
+            8,
+            y + 4
+        );
+
+    }
+
+
+    /* HRV */
+
+    drawLine(
+        ctx,
+        hrv,
+        xPosition,
+        yPosition,
+        "#2563eb"
+    );
+
+
+    /* RHR */
+
+    drawLine(
+        ctx,
+        rhr,
+        xPosition,
+        yPosition,
+        "#ef4444"
+    );
+
+
+    /* Legend */
+
+    ctx.fillStyle =
+        "#2563eb";
+
+    ctx.fillRect(
+        padding,
+        12,
+        12,
+        12
+    );
+
+
+    ctx.fillStyle =
+        "#172033";
+
+    ctx.font =
+        "12px Arial";
+
+
+    ctx.fillText(
+        "HRV",
+        padding + 18,
+        22
+    );
+
+
+    ctx.fillStyle =
+        "#ef4444";
+
+    ctx.fillRect(
+        padding + 65,
+        12,
+        12,
+        12
+    );
+
+
+    ctx.fillStyle =
+        "#172033";
+
+
+    ctx.fillText(
+        "Resting HR",
+        padding + 83,
+        22
+    );
+
+
+    /* Day labels */
+
+    ctx.fillStyle =
+        "#667085";
+
+    ctx.font =
+        "11px Arial";
+
+
+    const step =
+        Math.max(
+            1,
+            Math.floor(
+                series.length / 7
+            )
+        );
+
+
+    series.forEach(
+        (item, i) => {
+
+            if (
+                i % step !== 0
+            ) {
+
+                return;
+
+            }
+
+
+            ctx.fillText(
+                "Day " + item.day,
+                xPosition(i) - 15,
+                height - 12
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   DRAW LINE
+============================================================ */
+
+function drawLine(
+    ctx,
+    values,
+    xPosition,
+    yPosition,
+    lineColor
+) {
+
+    ctx.strokeStyle =
+        lineColor;
+
+    ctx.lineWidth =
+        2.5;
+
+
+    ctx.beginPath();
+
+
+    let started = false;
+
+
+    values.forEach(
+        (value, i) => {
+
+            if (
+                !Number.isFinite(value)
+            ) {
+
+                return;
+
+            }
+
+
+            const x =
+                xPosition(i);
+
+
+            const y =
+                yPosition(value);
+
+
+            if (!started) {
+
+                ctx.moveTo(
+                    x,
+                    y
+                );
+
+                started = true;
+
+            } else {
+
+                ctx.lineTo(
+                    x,
+                    y
+                );
+
+            }
+
+        }
+    );
+
+
+    ctx.stroke();
+
+
+    /* Points */
+
+    values.forEach(
+        (value, i) => {
+
+            if (
+                !Number.isFinite(value)
+            ) {
+
+                return;
+
+            }
+
+
+            const x =
+                xPosition(i);
+
+
+            const y =
+                yPosition(value);
+
+
+            ctx.fillStyle =
+                lineColor;
+
+
+            ctx.beginPath();
+
+
+            ctx.arc(
+                x,
+                y,
+                3,
+                0,
+                Math.PI * 2
+            );
+
+
+            ctx.fill();
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   FIND ACTUAL RF WHAT-IF SCENARIO
+============================================================ */
+
+function findWhatIfScenario(
+    sleep,
+    steps,
+    rhr
+) {
+
+    if (
+        !currentPatient ||
+        !Array.isArray(
+            currentPatient.what_if_scenarios
+        )
+    ) {
+
+        return null;
+
+    }
+
+
+    const scenarios =
+        currentPatient.what_if_scenarios;
+
+
+    if (
+        scenarios.length === 0
+    ) {
+
+        return null;
+
+    }
+
+
+    /*
+       Sliders allow more values than the
+       precomputed scenario grid.
+
+       Therefore choose the nearest
+       precomputed Random Forest scenario.
+    */
+
+    let best =
+        null;
+
+    let bestDistance =
+        Infinity;
+
+
+    scenarios.forEach(
+        scenario => {
+
+            const ds =
+                Math.abs(
+                    Number(
+                        scenario.sleep_change
+                    ) - sleep
+                );
+
+            const dsteps =
+                Math.abs(
+                    Number(
+                        scenario.steps_change
+                    ) - steps
+                );
+
+            const drhr =
+                Math.abs(
+                    Number(
+                        scenario.rhr_change
+                    ) - rhr
+                );
+
+
+            const distance =
+                ds +
+                (dsteps / 1000) +
+                drhr;
+
+
+            if (
+                distance <
+                bestDistance
+            ) {
+
+                bestDistance =
+                    distance;
+
+                best =
+                    scenario;
+
+            }
+
+        }
+    );
+
+
+    return best;
+
+}
+
+
+/* ============================================================
+   WHAT-IF SIMULATOR
+============================================================ */
+
+function updateSimulator() {
+
+    if (!currentPatient) {
+
+        return;
+
+    }
+
+
+    const sleep =
+        Number(
+            document.getElementById(
+                "sleepSlider"
+            ).value
+        );
+
+
+    const steps =
+        Number(
+            document.getElementById(
+                "stepsSlider"
+            ).value
+        );
+
+
+    const rhr =
+        Number(
+            document.getElementById(
+                "rhrSlider"
+            ).value
+        );
+
+
+    /* Slider labels */
+
+    document.getElementById(
+        "sleepValue"
+    ).textContent =
+        (
+            sleep >= 0
+            ? "+"
+            : ""
+        ) +
+        sleep.toFixed(1) +
+        "h";
+
+
+    document.getElementById(
+        "stepsValue"
+    ).textContent =
+        (
+            steps >= 0
+            ? "+"
+            : ""
+        ) +
+        steps;
+
+
+    document.getElementById(
+        "rhrValue"
+    ).textContent =
+        (
+            rhr >= 0
+            ? "+"
+            : ""
+        ) +
+        rhr +
+        " bpm";
+
+
+    /* Find actual RF scenario */
+
+    const scenario =
+        findWhatIfScenario(
+            sleep,
+            steps,
+            rhr
+        );
+
+
+    const result =
+        document.getElementById(
+            "simResult"
+        );
+
+
+    if (!scenario) {
+
+        result.innerHTML = `
+
+            <strong>
+                What-If data unavailable
+            </strong>
+
+            <p class="note">
+                Precomputed Random Forest scenario
+                data was not found for this patient.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    const prediction =
+        Number(
+            scenario.prediction
+        );
+
+
+    const risk =
+        riskTextFromNumber(
+            prediction
+        );
+
+
+    const riskClass =
+        getRiskClass(
+            risk
+        );
+
+
+    const probs =
+        scenario.probabilities ||
+        {};
+
+
+    const low =
+        Number(
+            probs["0"] ?? 0
+        ) * 100;
+
+
+    const moderate =
+        Number(
+            probs["1"] ?? 0
+        ) * 100;
+
+
+    const high =
+        Number(
+            probs["2"] ?? 0
+        ) * 100;
+
+
+    result.innerHTML = `
+
+        <div class="sim-result-title">
+
+            Model scenario:
+            <span class="${riskClass}">
+                ${risk}
+            </span>
+
+        </div>
+
+
+        <div class="note">
+
+            Actual Random Forest prediction
+            for the nearest precomputed scenario.
+
+        </div>
+
+
+        <div class="sim-probs">
+
+
+            <div class="sim-prob">
+
+                <div class="sim-prob-label">
+                    Low
+                </div>
+
+                <div class="sim-prob-value">
+                    ${low.toFixed(1)}%
+                </div>
+
+            </div>
+
+
+            <div class="sim-prob">
+
+                <div class="sim-prob-label">
+                    Moderate
+                </div>
+
+                <div class="sim-prob-value">
+                    ${moderate.toFixed(1)}%
+                </div>
+
+            </div>
+
+
+            <div class="sim-prob">
+
+                <div class="sim-prob-label">
+                    High
+                </div>
+
+                <div class="sim-prob-value">
+                    ${high.toFixed(1)}%
+                </div>
+
+            </div>
+
+
+        </div>
+
+    `;
+
+}
+
+
+/* ============================================================
+   RISK TEXT FROM NUMBER
+============================================================ */
+
+function riskTextFromNumber(
+    risk
+) {
+
+    if (
+        risk === 0
+    ) {
+
+        return "Low";
+
+    }
+
+
+    if (
+        risk === 1
+    ) {
+
+        return "Moderate";
+
+    }
+
+
+    if (
+        risk === 2
+    ) {
+
+        return "High / Early Warning";
+
+    }
+
+
+    return "Unknown";
+
+}
+
+
+/* ============================================================
+   RESET SIMULATOR
+============================================================ */
+
+function resetSimulator() {
+
+    document.getElementById(
+        "sleepSlider"
+    ).value = 0;
+
+
+    document.getElementById(
+        "stepsSlider"
+    ).value = 0;
+
+
+    document.getElementById(
+        "rhrSlider"
+    ).value = 0;
+
+}
+
+
+/* ============================================================
+   SLIDER EVENTS
+============================================================ */
+
+document
+    .getElementById(
+        "sleepSlider"
+    )
+    .addEventListener(
+        "input",
+        updateSimulator
+    );
+
+
+document
+    .getElementById(
+        "stepsSlider"
+    )
+    .addEventListener(
+        "input",
+        updateSimulator
+    );
+
+
+document
+    .getElementById(
+        "rhrSlider"
+    )
+    .addEventListener(
+        "input",
+        updateSimulator
+    );
+
+
+/* ============================================================
+   WINDOW RESIZE
+============================================================ */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        if (currentPatient) {
+
+            renderChart();
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   START
+============================================================ */
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>

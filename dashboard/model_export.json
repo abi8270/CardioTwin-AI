@@ -1,0 +1,1016 @@
+{
+ "model": {
+  "coef": [
+   [
+    -0.08237904625065608,
+    -0.019509902851428344,
+    0.10964969278767858,
+    0.0495678707368261,
+    0.31330942448113414,
+    0.03802524070115286,
+    -0.14187026492910879,
+    0.021727733383400612,
+    0.045272546056459036,
+    0.013445193068006976,
+    0.2244003996677065,
+    0.21115899071310631,
+    -0.9742523172899576,
+    0.060161084247173105,
+    -0.07518870449621994,
+    -0.34258849735296937,
+    -0.23006690550744152,
+    0.7484408431678928,
+    0.7578895693896942,
+    0.17672302617298485,
+    0.1678886413232004,
+    0.38069821407090176
+   ],
+   [
+    0.022358014049549495,
+    0.10357916688635971,
+    -0.1123800841856144,
+    -0.018660590072481734,
+    0.15198228090708096,
+    0.07296910564985784,
+    0.015088964269510266,
+    -0.0654216173058459,
+    0.08370111552273944,
+    0.1391520919487346,
+    0.03221251305465192,
+    0.3583127653287469,
+    0.18315138390319455,
+    0.12116931378647297,
+    -0.049305565382224276,
+    -0.43022149348224314,
+    0.2796725827637408,
+    -0.24659648781084595,
+    -0.21556191024967833,
+    0.1401851341391674,
+    0.1282798408598765,
+    -0.09553752347408674
+   ],
+   [
+    0.06002103220110596,
+    -0.08406926403493085,
+    0.002730391397935664,
+    -0.030907280664341907,
+    -0.46529170538821407,
+    -0.110994346351011,
+    0.1267813006596001,
+    0.043693883922443395,
+    -0.12897366157919976,
+    -0.15259728501674308,
+    -0.2566129127223642,
+    -0.5694717560418525,
+    0.7911009333867633,
+    -0.18133039803364487,
+    0.12449426987844513,
+    0.7728099908352122,
+    -0.04960567725630045,
+    -0.5018443553570503,
+    -0.5423276591400189,
+    -0.3169081603121536,
+    -0.29616848218308006,
+    -0.28516069059681787
+   ]
+  ],
+  "intercept": [
+   1.432856713695452,
+   2.127872150554134,
+   -3.5607288642495867
+  ],
+  "classes": [
+   0,
+   1,
+   2
+  ]
+ },
+ "scaler": {
+  "mean": [
+   51.721875,
+   0.5333333333333333,
+   25.322187500000002,
+   125.06656249999999,
+   193.77614583333337,
+   0.18541666666666667,
+   0.20416666666666666,
+   0.071875,
+   0.22708333333333333,
+   49.772465277777776,
+   46.076840277777784,
+   -0.3375315934065951,
+   1.7984510558412592,
+   71.01461805555554,
+   73.57677083333334,
+   0.2333021978021956,
+   6.5894409722222225,
+   6.098993055555555,
+   -0.044522825091575305,
+   6786.798958333334,
+   6302.505555555556,
+   -43.92956959706983
+  ],
+  "scale": [
+   12.878063576655265,
+   0.49888765156985887,
+   3.602096815029234,
+   12.917211412824122,
+   26.162788136245457,
+   0.3886352099191334,
+   0.4030913530316532,
+   0.2582808246366733,
+   0.41894688572127564,
+   12.678467818992178,
+   17.53520353268881,
+   0.5018047940138267,
+   1.8300886115978747,
+   8.879485458454011,
+   12.191527624645019,
+   0.3291372226063094,
+   0.9709003910970415,
+   1.5327659895285641,
+   0.05666283449868432,
+   2589.8318059883927,
+   3125.1911672589854,
+   55.49336431060991
+  ]
+ },
+ "feature_cols": [
+  "age",
+  "sex",
+  "bmi",
+  "systolic_bp",
+  "cholesterol_mgdl",
+  "diabetes_history",
+  "smoker",
+  "prior_cardiac_event",
+  "family_history_cvd",
+  "hrv_baseline",
+  "hrv_recent",
+  "hrv_slope",
+  "hrv_volatility",
+  "rhr_baseline",
+  "rhr_recent",
+  "rhr_slope",
+  "sleep_baseline",
+  "sleep_recent",
+  "sleep_slope",
+  "steps_baseline",
+  "steps_recent",
+  "steps_slope"
+ ],
+ "feature_importances": {
+  "hrv_volatility": 0.6495,
+  "rhr_slope": 0.5152,
+  "sleep_slope": 0.5053,
+  "sleep_recent": 0.499,
+  "hrv_slope": 0.3796,
+  "cholesterol_mgdl": 0.3102,
+  "steps_slope": 0.2538,
+  "steps_baseline": 0.2113,
+  "steps_recent": 0.1974,
+  "sleep_baseline": 0.1864
+ },
+ "patients": [
+  {
+   "patient_id": 2,
+   "ehr": {
+    "age": 40,
+    "sex": "F",
+    "bmi": 25.6,
+    "systolic_bp": 119.3,
+    "cholesterol_mgdl": 193.8,
+    "diabetes_history": false,
+    "smoker": false,
+    "prior_cardiac_event": false,
+    "family_history_cvd": false,
+    "patient_id": 2
+   },
+   "timeseries": [
+    {
+     "day": 0,
+     "hrv_ms": 64.9,
+     "resting_hr_bpm": 60.5,
+     "sleep_hours": 6.46,
+     "steps": 6452
+    },
+    {
+     "day": 1,
+     "hrv_ms": 65.6,
+     "resting_hr_bpm": 60.5,
+     "sleep_hours": 6.63,
+     "steps": 6435
+    },
+    {
+     "day": 2,
+     "hrv_ms": 65.3,
+     "resting_hr_bpm": 60.3,
+     "sleep_hours": 6.28,
+     "steps": 6233
+    },
+    {
+     "day": 3,
+     "hrv_ms": 65.0,
+     "resting_hr_bpm": 60.0,
+     "sleep_hours": 6.59,
+     "steps": 6314
+    },
+    {
+     "day": 4,
+     "hrv_ms": 65.4,
+     "resting_hr_bpm": 60.6,
+     "sleep_hours": 6.48,
+     "steps": 6560
+    },
+    {
+     "day": 5,
+     "hrv_ms": 65.2,
+     "resting_hr_bpm": 60.2,
+     "sleep_hours": 6.39,
+     "steps": 6399
+    },
+    {
+     "day": 6,
+     "hrv_ms": 66.0,
+     "resting_hr_bpm": 59.7,
+     "sleep_hours": 6.6,
+     "steps": 6485
+    },
+    {
+     "day": 7,
+     "hrv_ms": 65.5,
+     "resting_hr_bpm": 59.8,
+     "sleep_hours": 6.54,
+     "steps": 6370
+    },
+    {
+     "day": 8,
+     "hrv_ms": 65.8,
+     "resting_hr_bpm": 60.2,
+     "sleep_hours": 6.77,
+     "steps": 6414
+    },
+    {
+     "day": 9,
+     "hrv_ms": 65.4,
+     "resting_hr_bpm": 60.2,
+     "sleep_hours": 6.57,
+     "steps": 6654
+    },
+    {
+     "day": 10,
+     "hrv_ms": 66.2,
+     "resting_hr_bpm": 60.2,
+     "sleep_hours": 6.75,
+     "steps": 6271
+    },
+    {
+     "day": 11,
+     "hrv_ms": 65.6,
+     "resting_hr_bpm": 59.8,
+     "sleep_hours": 6.48,
+     "steps": 6243
+    },
+    {
+     "day": 12,
+     "hrv_ms": 66.2,
+     "resting_hr_bpm": 60.0,
+     "sleep_hours": 6.31,
+     "steps": 6297
+    },
+    {
+     "day": 13,
+     "hrv_ms": 66.1,
+     "resting_hr_bpm": 60.3,
+     "sleep_hours": 6.83,
+     "steps": 6887
+    }
+   ],
+   "features": {
+    "age": 40.0,
+    "sex": 0.0,
+    "bmi": 25.6,
+    "systolic_bp": 119.3,
+    "cholesterol_mgdl": 193.8,
+    "diabetes_history": 0.0,
+    "smoker": 0.0,
+    "prior_cardiac_event": 0.0,
+    "family_history_cvd": 0.0,
+    "hrv_baseline": 65.26666666666667,
+    "hrv_recent": 65.96666666666667,
+    "hrv_slope": 0.07604395604395418,
+    "hrv_volatility": 0.42581531362631886,
+    "rhr_baseline": 60.43333333333334,
+    "rhr_recent": 60.03333333333333,
+    "rhr_slope": -0.028791208791210783,
+    "sleep_baseline": 6.456666666666667,
+    "sleep_recent": 6.539999999999999,
+    "sleep_slope": 0.01261538461538445,
+    "steps_baseline": 6373.333333333333,
+    "steps_recent": 6475.666666666667,
+    "steps_slope": 9.507692307692025
+   },
+   "true_risk_level": 0
+  },
+  {
+   "patient_id": 5,
+   "ehr": {
+    "age": 64,
+    "sex": "F",
+    "bmi": 20.4,
+    "systolic_bp": 113.8,
+    "cholesterol_mgdl": 185.3,
+    "diabetes_history": false,
+    "smoker": false,
+    "prior_cardiac_event": false,
+    "family_history_cvd": false,
+    "patient_id": 5
+   },
+   "timeseries": [
+    {
+     "day": 0,
+     "hrv_ms": 57.9,
+     "resting_hr_bpm": 70.1,
+     "sleep_hours": 7.14,
+     "steps": 7661
+    },
+    {
+     "day": 1,
+     "hrv_ms": 58.0,
+     "resting_hr_bpm": 70.5,
+     "sleep_hours": 6.96,
+     "steps": 8055
+    },
+    {
+     "day": 2,
+     "hrv_ms": 57.8,
+     "resting_hr_bpm": 69.9,
+     "sleep_hours": 7.04,
+     "steps": 7875
+    },
+    {
+     "day": 3,
+     "hrv_ms": 58.5,
+     "resting_hr_bpm": 70.1,
+     "sleep_hours": 7.45,
+     "steps": 8102
+    },
+    {
+     "day": 4,
+     "hrv_ms": 58.2,
+     "resting_hr_bpm": 70.4,
+     "sleep_hours": 7.26,
+     "steps": 8049
+    },
+    {
+     "day": 5,
+     "hrv_ms": 58.0,
+     "resting_hr_bpm": 69.9,
+     "sleep_hours": 7.09,
+     "steps": 8073
+    },
+    {
+     "day": 6,
+     "hrv_ms": 57.7,
+     "resting_hr_bpm": 70.1,
+     "sleep_hours": 7.17,
+     "steps": 8101
+    },
+    {
+     "day": 7,
+     "hrv_ms": 58.5,
+     "resting_hr_bpm": 70.4,
+     "sleep_hours": 7.3,
+     "steps": 7689
+    },
+    {
+     "day": 8,
+     "hrv_ms": 58.2,
+     "resting_hr_bpm": 69.5,
+     "sleep_hours": 7.12,
+     "steps": 8152
+    },
+    {
+     "day": 9,
+     "hrv_ms": 58.6,
+     "resting_hr_bpm": 69.6,
+     "sleep_hours": 7.04,
+     "steps": 7930
+    },
+    {
+     "day": 10,
+     "hrv_ms": 57.9,
+     "resting_hr_bpm": 69.6,
+     "sleep_hours": 7.24,
+     "steps": 8098
+    },
+    {
+     "day": 11,
+     "hrv_ms": 58.6,
+     "resting_hr_bpm": 69.1,
+     "sleep_hours": 7.24,
+     "steps": 7936
+    },
+    {
+     "day": 12,
+     "hrv_ms": 58.6,
+     "resting_hr_bpm": 70.3,
+     "sleep_hours": 6.88,
+     "steps": 7836
+    },
+    {
+     "day": 13,
+     "hrv_ms": 58.7,
+     "resting_hr_bpm": 69.3,
+     "sleep_hours": 7.42,
+     "steps": 7980
+    }
+   ],
+   "features": {
+    "age": 64.0,
+    "sex": 0.0,
+    "bmi": 20.4,
+    "systolic_bp": 113.8,
+    "cholesterol_mgdl": 185.3,
+    "diabetes_history": 0.0,
+    "smoker": 0.0,
+    "prior_cardiac_event": 0.0,
+    "family_history_cvd": 0.0,
+    "hrv_baseline": 57.9,
+    "hrv_recent": 58.63333333333333,
+    "hrv_slope": 0.051428571428568645,
+    "hrv_volatility": 0.3473605341131044,
+    "rhr_baseline": 70.16666666666667,
+    "rhr_recent": 69.56666666666666,
+    "rhr_slope": -0.061978021978023316,
+    "sleep_baseline": 7.046666666666667,
+    "sleep_recent": 7.18,
+    "sleep_slope": 0.004857142857142671,
+    "steps_baseline": 7863.666666666667,
+    "steps_recent": 7917.333333333333,
+    "steps_slope": 3.272527472527119
+   },
+   "true_risk_level": 0
+  },
+  {
+   "patient_id": 1,
+   "ehr": {
+    "age": 38,
+    "sex": "M",
+    "bmi": 29.5,
+    "systolic_bp": 112.4,
+    "cholesterol_mgdl": 179.0,
+    "diabetes_history": false,
+    "smoker": false,
+    "prior_cardiac_event": true,
+    "family_history_cvd": false,
+    "patient_id": 1
+   },
+   "timeseries": [
+    {
+     "day": 0,
+     "hrv_ms": 42.6,
+     "resting_hr_bpm": 80.7,
+     "sleep_hours": 6.52,
+     "steps": 6235
+    },
+    {
+     "day": 1,
+     "hrv_ms": 42.2,
+     "resting_hr_bpm": 81.4,
+     "sleep_hours": 6.36,
+     "steps": 6197
+    },
+    {
+     "day": 2,
+     "hrv_ms": 41.7,
+     "resting_hr_bpm": 81.7,
+     "sleep_hours": 6.24,
+     "steps": 6166
+    },
+    {
+     "day": 3,
+     "hrv_ms": 40.8,
+     "resting_hr_bpm": 82.3,
+     "sleep_hours": 6.29,
+     "steps": 6204
+    },
+    {
+     "day": 4,
+     "hrv_ms": 40.9,
+     "resting_hr_bpm": 82.5,
+     "sleep_hours": 6.07,
+     "steps": 5937
+    },
+    {
+     "day": 5,
+     "hrv_ms": 39.7,
+     "resting_hr_bpm": 83.3,
+     "sleep_hours": 6.05,
+     "steps": 5853
+    },
+    {
+     "day": 6,
+     "hrv_ms": 38.5,
+     "resting_hr_bpm": 83.6,
+     "sleep_hours": 6.1,
+     "steps": 5981
+    },
+    {
+     "day": 7,
+     "hrv_ms": 37.9,
+     "resting_hr_bpm": 83.8,
+     "sleep_hours": 5.92,
+     "steps": 5852
+    },
+    {
+     "day": 8,
+     "hrv_ms": 38.0,
+     "resting_hr_bpm": 84.2,
+     "sleep_hours": 5.93,
+     "steps": 5749
+    },
+    {
+     "day": 9,
+     "hrv_ms": 37.1,
+     "resting_hr_bpm": 84.8,
+     "sleep_hours": 5.53,
+     "steps": 5611
+    },
+    {
+     "day": 10,
+     "hrv_ms": 36.2,
+     "resting_hr_bpm": 84.8,
+     "sleep_hours": 5.62,
+     "steps": 5803
+    },
+    {
+     "day": 11,
+     "hrv_ms": 35.5,
+     "resting_hr_bpm": 85.7,
+     "sleep_hours": 5.33,
+     "steps": 5449
+    },
+    {
+     "day": 12,
+     "hrv_ms": 35.3,
+     "resting_hr_bpm": 86.0,
+     "sleep_hours": 5.61,
+     "steps": 5538
+    },
+    {
+     "day": 13,
+     "hrv_ms": 34.5,
+     "resting_hr_bpm": 86.0,
+     "sleep_hours": 5.55,
+     "steps": 5310
+    }
+   ],
+   "features": {
+    "age": 38.0,
+    "sex": 1.0,
+    "bmi": 29.5,
+    "systolic_bp": 112.4,
+    "cholesterol_mgdl": 179.0,
+    "diabetes_history": 0.0,
+    "smoker": 0.0,
+    "prior_cardiac_event": 1.0,
+    "family_history_cvd": 0.0,
+    "hrv_baseline": 42.16666666666667,
+    "hrv_recent": 35.1,
+    "hrv_slope": -0.6459340659340681,
+    "hrv_volatility": 2.7184857614423583,
+    "rhr_baseline": 81.26666666666667,
+    "rhr_recent": 85.89999999999999,
+    "rhr_slope": 0.41186813186813304,
+    "sleep_baseline": 6.373333333333332,
+    "sleep_recent": 5.496666666666667,
+    "sleep_slope": -0.08127472527472547,
+    "steps_baseline": 6199.333333333333,
+    "steps_recent": 5432.333333333333,
+    "steps_slope": -67.2637362637366
+   },
+   "true_risk_level": 1
+  },
+  {
+   "patient_id": 3,
+   "ehr": {
+    "age": 24,
+    "sex": "F",
+    "bmi": 23.9,
+    "systolic_bp": 126.3,
+    "cholesterol_mgdl": 192.8,
+    "diabetes_history": true,
+    "smoker": false,
+    "prior_cardiac_event": false,
+    "family_history_cvd": true,
+    "patient_id": 3
+   },
+   "timeseries": [
+    {
+     "day": 0,
+     "hrv_ms": 46.2,
+     "resting_hr_bpm": 70.1,
+     "sleep_hours": 6.53,
+     "steps": 4631
+    },
+    {
+     "day": 1,
+     "hrv_ms": 45.3,
+     "resting_hr_bpm": 69.6,
+     "sleep_hours": 6.28,
+     "steps": 4295
+    },
+    {
+     "day": 2,
+     "hrv_ms": 45.7,
+     "resting_hr_bpm": 70.1,
+     "sleep_hours": 6.47,
+     "steps": 4188
+    },
+    {
+     "day": 3,
+     "hrv_ms": 44.7,
+     "resting_hr_bpm": 70.8,
+     "sleep_hours": 6.24,
+     "steps": 4238
+    },
+    {
+     "day": 4,
+     "hrv_ms": 43.4,
+     "resting_hr_bpm": 71.3,
+     "sleep_hours": 6.12,
+     "steps": 3980
+    },
+    {
+     "day": 5,
+     "hrv_ms": 42.6,
+     "resting_hr_bpm": 71.6,
+     "sleep_hours": 6.35,
+     "steps": 4108
+    },
+    {
+     "day": 6,
+     "hrv_ms": 42.4,
+     "resting_hr_bpm": 72.0,
+     "sleep_hours": 6.22,
+     "steps": 4037
+    },
+    {
+     "day": 7,
+     "hrv_ms": 41.7,
+     "resting_hr_bpm": 72.7,
+     "sleep_hours": 6.01,
+     "steps": 4154
+    },
+    {
+     "day": 8,
+     "hrv_ms": 41.4,
+     "resting_hr_bpm": 72.4,
+     "sleep_hours": 5.66,
+     "steps": 4091
+    },
+    {
+     "day": 9,
+     "hrv_ms": 41.4,
+     "resting_hr_bpm": 73.1,
+     "sleep_hours": 5.73,
+     "steps": 3983
+    },
+    {
+     "day": 10,
+     "hrv_ms": 39.6,
+     "resting_hr_bpm": 73.3,
+     "sleep_hours": 5.8,
+     "steps": 3625
+    },
+    {
+     "day": 11,
+     "hrv_ms": 39.5,
+     "resting_hr_bpm": 73.9,
+     "sleep_hours": 5.68,
+     "steps": 3815
+    },
+    {
+     "day": 12,
+     "hrv_ms": 38.9,
+     "resting_hr_bpm": 74.5,
+     "sleep_hours": 5.24,
+     "steps": 3517
+    },
+    {
+     "day": 13,
+     "hrv_ms": 37.9,
+     "resting_hr_bpm": 74.4,
+     "sleep_hours": 5.34,
+     "steps": 3394
+    }
+   ],
+   "features": {
+    "age": 24.0,
+    "sex": 0.0,
+    "bmi": 23.9,
+    "systolic_bp": 126.3,
+    "cholesterol_mgdl": 192.8,
+    "diabetes_history": 1.0,
+    "smoker": 0.0,
+    "prior_cardiac_event": 0.0,
+    "family_history_cvd": 1.0,
+    "hrv_baseline": 45.73333333333333,
+    "hrv_recent": 38.76666666666667,
+    "hrv_slope": -0.6243956043956055,
+    "hrv_volatility": 2.641521789165739,
+    "rhr_baseline": 69.93333333333332,
+    "rhr_recent": 74.26666666666667,
+    "rhr_slope": 0.3815384615384592,
+    "sleep_baseline": 6.426666666666667,
+    "sleep_recent": 5.419999999999999,
+    "sleep_slope": -0.09083516483516502,
+    "steps_baseline": 4371.333333333333,
+    "steps_recent": 3575.3333333333335,
+    "steps_slope": -70.78241758241766
+   },
+   "true_risk_level": 1
+  },
+  {
+   "patient_id": 14,
+   "ehr": {
+    "age": 39,
+    "sex": "F",
+    "bmi": 30.7,
+    "systolic_bp": 154.3,
+    "cholesterol_mgdl": 192.4,
+    "diabetes_history": true,
+    "smoker": false,
+    "prior_cardiac_event": false,
+    "family_history_cvd": false,
+    "patient_id": 14
+   },
+   "timeseries": [
+    {
+     "day": 0,
+     "hrv_ms": 29.2,
+     "resting_hr_bpm": 86.4,
+     "sleep_hours": 5.06,
+     "steps": 3176
+    },
+    {
+     "day": 1,
+     "hrv_ms": 28.5,
+     "resting_hr_bpm": 87.9,
+     "sleep_hours": 4.97,
+     "steps": 3048
+    },
+    {
+     "day": 2,
+     "hrv_ms": 25.9,
+     "resting_hr_bpm": 88.1,
+     "sleep_hours": 4.95,
+     "steps": 2939
+    },
+    {
+     "day": 3,
+     "hrv_ms": 25.2,
+     "resting_hr_bpm": 89.4,
+     "sleep_hours": 4.71,
+     "steps": 2839
+    },
+    {
+     "day": 4,
+     "hrv_ms": 23.9,
+     "resting_hr_bpm": 89.8,
+     "sleep_hours": 4.53,
+     "steps": 2070
+    },
+    {
+     "day": 5,
+     "hrv_ms": 22.5,
+     "resting_hr_bpm": 89.4,
+     "sleep_hours": 3.96,
+     "steps": 2427
+    },
+    {
+     "day": 6,
+     "hrv_ms": 21.2,
+     "resting_hr_bpm": 91.3,
+     "sleep_hours": 4.02,
+     "steps": 2415
+    },
+    {
+     "day": 7,
+     "hrv_ms": 19.3,
+     "resting_hr_bpm": 93.5,
+     "sleep_hours": 4.01,
+     "steps": 2120
+    },
+    {
+     "day": 8,
+     "hrv_ms": 18.9,
+     "resting_hr_bpm": 93.6,
+     "sleep_hours": 3.66,
+     "steps": 1893
+    },
+    {
+     "day": 9,
+     "hrv_ms": 16.7,
+     "resting_hr_bpm": 93.9,
+     "sleep_hours": 3.66,
+     "steps": 1648
+    },
+    {
+     "day": 10,
+     "hrv_ms": 15.8,
+     "resting_hr_bpm": 95.4,
+     "sleep_hours": 3.5,
+     "steps": 1593
+    },
+    {
+     "day": 11,
+     "hrv_ms": 14.0,
+     "resting_hr_bpm": 96.5,
+     "sleep_hours": 3.21,
+     "steps": 1303
+    },
+    {
+     "day": 12,
+     "hrv_ms": 13.1,
+     "resting_hr_bpm": 97.0,
+     "sleep_hours": 2.98,
+     "steps": 1376
+    },
+    {
+     "day": 13,
+     "hrv_ms": 11.3,
+     "resting_hr_bpm": 97.4,
+     "sleep_hours": 3.16,
+     "steps": 1270
+    }
+   ],
+   "features": {
+    "age": 39.0,
+    "sex": 0.0,
+    "bmi": 30.7,
+    "systolic_bp": 154.3,
+    "cholesterol_mgdl": 192.4,
+    "diabetes_history": 1.0,
+    "smoker": 0.0,
+    "prior_cardiac_event": 0.0,
+    "family_history_cvd": 0.0,
+    "hrv_baseline": 27.866666666666664,
+    "hrv_recent": 12.800000000000002,
+    "hrv_slope": -1.3707692307692327,
+    "hrv_volatility": 5.744624816793023,
+    "rhr_baseline": 87.46666666666665,
+    "rhr_recent": 96.96666666666665,
+    "rhr_slope": 0.8703296703296707,
+    "sleep_baseline": 4.993333333333333,
+    "sleep_recent": 3.1166666666666667,
+    "sleep_slope": -0.16698901098901117,
+    "steps_baseline": 3054.3333333333335,
+    "steps_recent": 1316.3333333333333,
+    "steps_slope": -155.2153846153846
+   },
+   "true_risk_level": 2
+  },
+  {
+   "patient_id": 19,
+   "ehr": {
+    "age": 60,
+    "sex": "M",
+    "bmi": 33.9,
+    "systolic_bp": 155.0,
+    "cholesterol_mgdl": 222.5,
+    "diabetes_history": false,
+    "smoker": false,
+    "prior_cardiac_event": true,
+    "family_history_cvd": true,
+    "patient_id": 19
+   },
+   "timeseries": [
+    {
+     "day": 0,
+     "hrv_ms": 31.2,
+     "resting_hr_bpm": 86.8,
+     "sleep_hours": 4.21,
+     "steps": 3739
+    },
+    {
+     "day": 1,
+     "hrv_ms": 31.0,
+     "resting_hr_bpm": 87.9,
+     "sleep_hours": 3.9,
+     "steps": 3880
+    },
+    {
+     "day": 2,
+     "hrv_ms": 29.9,
+     "resting_hr_bpm": 89.4,
+     "sleep_hours": 3.67,
+     "steps": 3371
+    },
+    {
+     "day": 3,
+     "hrv_ms": 27.0,
+     "resting_hr_bpm": 90.4,
+     "sleep_hours": 3.77,
+     "steps": 3044
+    },
+    {
+     "day": 4,
+     "hrv_ms": 26.3,
+     "resting_hr_bpm": 90.7,
+     "sleep_hours": 3.26,
+     "steps": 3138
+    },
+    {
+     "day": 5,
+     "hrv_ms": 24.2,
+     "resting_hr_bpm": 92.3,
+     "sleep_hours": 3.45,
+     "steps": 2942
+    },
+    {
+     "day": 6,
+     "hrv_ms": 22.6,
+     "resting_hr_bpm": 92.6,
+     "sleep_hours": 3.4,
+     "steps": 2413
+    },
+    {
+     "day": 7,
+     "hrv_ms": 22.3,
+     "resting_hr_bpm": 93.4,
+     "sleep_hours": 3.16,
+     "steps": 2579
+    },
+    {
+     "day": 8,
+     "hrv_ms": 21.2,
+     "resting_hr_bpm": 95.0,
+     "sleep_hours": 3.22,
+     "steps": 2499
+    },
+    {
+     "day": 9,
+     "hrv_ms": 19.8,
+     "resting_hr_bpm": 95.1,
+     "sleep_hours": 2.94,
+     "steps": 2266
+    },
+    {
+     "day": 10,
+     "hrv_ms": 18.0,
+     "resting_hr_bpm": 96.6,
+     "sleep_hours": 2.24,
+     "steps": 2264
+    },
+    {
+     "day": 11,
+     "hrv_ms": 17.3,
+     "resting_hr_bpm": 97.6,
+     "sleep_hours": 2.09,
+     "steps": 2061
+    },
+    {
+     "day": 12,
+     "hrv_ms": 15.8,
+     "resting_hr_bpm": 97.6,
+     "sleep_hours": 2.04,
+     "steps": 2061
+    },
+    {
+     "day": 13,
+     "hrv_ms": 14.2,
+     "resting_hr_bpm": 99.4,
+     "sleep_hours": 2.47,
+     "steps": 1850
+    }
+   ],
+   "features": {
+    "age": 60.0,
+    "sex": 1.0,
+    "bmi": 33.9,
+    "systolic_bp": 155.0,
+    "cholesterol_mgdl": 222.5,
+    "diabetes_history": 0.0,
+    "smoker": 0.0,
+    "prior_cardiac_event": 1.0,
+    "family_history_cvd": 1.0,
+    "hrv_baseline": 30.7,
+    "hrv_recent": 15.766666666666666,
+    "hrv_slope": -1.3327472527472535,
+    "hrv_volatility": 5.602040444593126,
+    "rhr_baseline": 88.03333333333335,
+    "rhr_recent": 98.2,
+    "rhr_slope": 0.9199999999999958,
+    "sleep_baseline": 3.9266666666666663,
+    "sleep_recent": 2.1999999999999997,
+    "sleep_slope": -0.15503296703296712,
+    "steps_baseline": 3663.3333333333335,
+    "steps_recent": 1990.6666666666667,
+    "steps_slope": -147.99780219780234
+   },
+   "true_risk_level": 2
+  }
+ ]
+}
